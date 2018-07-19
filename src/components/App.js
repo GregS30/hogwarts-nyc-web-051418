@@ -27,7 +27,7 @@ class App extends Component {
 	}
 
   renderDisplay = () => {
-    return null;
+    return <HogDisplay />
   }
 
   renderShow = () => {

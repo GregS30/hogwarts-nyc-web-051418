@@ -32,7 +32,7 @@ class HogDisplay extends Component {
     let filteredHogs = hogs.filter(hog => {
       return (hog.name.toLowerCase().includes(search) &&  this.matchesGreased(hog.greased));
     });
-    return filteredHogs.map((hog, index) => {
+    return filteredHogs.map((hog) => {
       const hog_url =
         './hog-imgs/' +
         hog.name

@@ -18,6 +18,13 @@ class HogSearch extends Component {
           <option value="no">no</option>
           <option value="both">both</option>
         </select>
+        <label htmlFor="sort">   Sort by </label>
+          <select name="sort" value={this.props.sort} onChange={event => this.props.handleSort(event)}>
+            <option value="name">name</option>
+            <option value="weight">weight</option>
+          </select>
+
+
       </div>
     );
   }

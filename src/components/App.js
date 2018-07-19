@@ -14,7 +14,8 @@ class App extends Component {
       page: 'index',
       search: '',
       pigId: '',
-      greased: 'both'
+      greased: 'both',
+      sort: 'name',
     };
   }
 
@@ -34,7 +35,9 @@ class App extends Component {
       <div>
         <HogSearch handleSearch={this.handleSearchChange}
           handleGreased={this.handleGreased}
+          handleSort={this.handleSort}
           greased={this.state.greased}
+          sort={this.state.sort}
         />
         <HogDisplay
           search={this.state.search}
@@ -71,8 +74,15 @@ class App extends Component {
     this.setState(
       {
         greased: event.target.value
-      },
-      () => console.log('Greased', this.state)
+      }
+    );
+  };
+
+  handleSort = event => {
+    this.setState(
+      {
+        sort: event.target.value
+      }
     );
   };
 

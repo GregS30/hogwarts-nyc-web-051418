@@ -6,8 +6,14 @@ class HogShow extends Component {
     super(props);
   }
 
+  findHog = () => {
+      return hogs.find(function(hog){
+        return hog.name === this.props.pigId
+      }.bind(this))
+    }
+
   render() {
-    const hog = hogs[this.props.pigId];
+    const hog = this.findHog()
     const hog_url =
       './hog-imgs/' +
       hog.name
@@ -37,10 +43,10 @@ class HogShow extends Component {
           }
         </p>
         <p>{hog['highest medal achieved']}</p>
-        <button onClick={this.props.handleClick} className="button">
+  {/*}      <button onClick={this.props.handleClick} className="button">
           Hide
         </button>
-      </div>
+  */}    </div>
     );
   }
 }

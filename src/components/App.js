@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       page: 'index',
       search: '',
-      pigId: ''
+      pigId: '',
+      greased: 'both'
     };
   }
 
@@ -31,10 +32,14 @@ class App extends Component {
   renderDisplay = () => {
     return (
       <div>
-        <HogSearch handleSearch={this.handleSearchChange} />
+        <HogSearch handleSearch={this.handleSearchChange}
+          handleGreased={this.handleGreased}
+          greased={this.state.greased}
+        />
         <HogDisplay
           search={this.state.search}
           handleImageClick={this.handleImageClick}
+          greased={this.state.greased}
         />
       </div>
     );
@@ -43,7 +48,8 @@ class App extends Component {
   renderShow = () => {
     return (
       <div>
-        <HogSearch handleSearch={this.handleSearchChange} />
+{/*         <HogSearch handleSearch={this.handleSearchChange} />
+*/}
         <HogShow
           pigId={this.state.pigId}
           handleReturnClick={this.handleReturnClick}
@@ -58,6 +64,15 @@ class App extends Component {
         [event.target.name]: event.target.value
       },
       () => console.log('App', this.state)
+    );
+  };
+
+  handleGreased = event => {
+    this.setState(
+      {
+        greased: event.target.value
+      },
+      () => console.log('Greased', this.state)
     );
   };
 

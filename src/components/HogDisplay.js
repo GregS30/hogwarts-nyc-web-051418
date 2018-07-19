@@ -12,10 +12,25 @@ class HogDisplay extends Component {
     };
   }
 
+  matchesGreased = (greased) => {
+    if (this.props.greased === 'both') {
+      return true
+    }
+    else if (this.props.greased === 'no' && !greased) {
+      return true
+    }
+    else if (this.props.greased === 'yes' && greased) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
   getHogs = () => {
     let search = this.props.search;
     let filteredHogs = hogs.filter(hog => {
-      return hog.name.toLowerCase().includes(search);
+      return (hog.name.toLowerCase().includes(search) &&  this.matchesGreased(hog.greased));
     });
     return filteredHogs.map((hog, index) => {
       const hog_url =
@@ -30,7 +45,7 @@ class HogDisplay extends Component {
         <li key={UUID()}>
           <p>{hog.name}</p>
           <img
-            id={index}
+            id={hog.name}
             src={hog_url}
             onClick={event => this.props.handleImageClick(event)}
           />

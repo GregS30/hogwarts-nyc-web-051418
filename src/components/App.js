@@ -10,32 +10,33 @@ class App extends Component {
   constructor() {
     super();
 
+    const newKey = 'weight';
+    const oldKey = 'weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water';
+
+    hogs.forEach((hog) => {
+      Object.defineProperty(hog, newKey,
+        Object.getOwnPropertyDescriptor(hog, oldKey));
+      delete hog[oldKey];
+    })
+
     this.state = {
+      hogs: hogs,
       page: 'index',
       search: '',
       pigId: '',
       greased: 'both',
       sort: 'name',
     };
-  }
 
-  renderPage = () => {
-    switch (this.state.page) {
-      case 'index':
-        return this.renderDisplay();
-      case 'show':
-        return this.renderShow();
-      default:
-        return null;
-    }
-  };
+    console.log(this.state.hogs[0])
+  }
 
   renderDisplay = () => {
     return (
       <div>
-        <HogSearch handleSearch={this.handleSearchChange}
-          handleGreased={this.handleGreased}
-          handleSort={this.handleSort}
+        <HogSearch handleSearch={this.controlsSetState}
+          handleGreased={this.controlsSetState}
+          handleSort={this.controlsSetState}
           greased={this.state.greased}
           sort={this.state.sort}
         />
@@ -51,8 +52,6 @@ class App extends Component {
   renderShow = () => {
     return (
       <div>
-{/*         <HogSearch handleSearch={this.handleSearchChange} />
-*/}
         <HogShow
           pigId={this.state.pigId}
           handleReturnClick={this.handleReturnClick}
@@ -61,50 +60,37 @@ class App extends Component {
     );
   };
 
-  handleSearchChange = event => {
+  controlsSetState = event => {
+    let name = event.target.name
     this.setState(
       {
         [event.target.name]: event.target.value
-      },
-      () => console.log('App', this.state)
-    );
-  };
-
-  handleGreased = event => {
-    this.setState(
-      {
-        greased: event.target.value
-      }
-    );
-  };
-
-  handleSort = event => {
-    this.setState(
-      {
-        sort: event.target.value
-      }
+      }, () => console.log(name, this.state)
     );
   };
 
   handleImageClick = event => {
-    console.log('clicked image');
-    this.setState(
-      Object.assign({}, this.state, {
-        pigId: event.target.id,
-        page: 'show'
-      }),
-      () => console.log(this.state)
-    );
+    this.setState({
+      pigId: event.target.id,
+      page: 'show',
+    });
   };
 
   handleReturnClick = event => {
-    this.setState(
-      Object.assign({}, this.state, {
-        pigId: event.target.id,
-        page: 'index'
-      }),
-      () => console.log(this.state)
-    );
+    this.setState({
+      page: 'index',
+    });
+  };
+
+  renderPage = () => {
+    switch (this.state.page) {
+      case 'index':
+        return this.renderDisplay();
+      case 'show':
+        return this.renderShow();
+      default:
+        return null;
+    }
   };
 
   render() {

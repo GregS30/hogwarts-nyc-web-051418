@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import hogs from '../porkers_data.js';
 
 class HogShow extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   findHog = () => {
-      return hogs.find(function(hog){
+      return this.state.hogs.find(function(hog){
         return hog.name === this.props.pigId
       }.bind(this))
     }
@@ -32,7 +28,7 @@ class HogShow extends Component {
             Return to List
           </button>
         </p>
-        <img src={hog_url} />
+        <img src={hog_url} alt={hog.name}/>
         <p>{hog.name}</p>
         <p>{hog.specialty}</p>
         <p>

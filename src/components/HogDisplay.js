@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import hogs from '../porkers_data.js';
 import UUID from 'uuid';
-import HogShow from './HogShow';
 
 class HogDisplay extends Component {
   constructor(props) {
@@ -11,6 +10,27 @@ class HogDisplay extends Component {
       pigId: null
     };
   }
+
+//items.sort((a, b) => a.localeCompare(b, 'fr', {ignorePunctuation: true})); // ['Adieu', 'café', 'Cliché', 'communiqué', 'Premier', 'réservé']
+
+
+  // sortName = (passedHogs) => {
+  //     return passedHogs.sort( function(a, b) {
+  //       if (nameA < nameB)
+  //           return -1
+  //       if (nameA > nameB)
+  //           return 1
+  //       return 0
+  //     }
+  //   )}
+
+    sortWeight = (passedHogs) => {
+      return passedHogs.sort( function(a, b) {
+        return a["weight"] - b["weight"]
+      })
+    }
+
+
 
   matchesGreased = (greased) => {
     if (this.props.greased === 'both') {
@@ -48,6 +68,7 @@ class HogDisplay extends Component {
             id={hog.name}
             src={hog_url}
             onClick={event => this.props.handleImageClick(event)}
+            alt={hog.name}
           />
         </li>
       );

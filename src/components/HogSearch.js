@@ -23,8 +23,6 @@ class HogSearch extends Component {
             <option value="name">name</option>
             <option value="weight">weight</option>
           </select>
-
-
       </div>
     );
   }

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import hogs from '../porkers_data.js';
 import UUID from 'uuid';
+import hogs from '../porkers_data';
 
 class HogDisplay extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      pigId: null
-    };
-  }
 
 //items.sort((a, b) => a.localeCompare(b, 'fr', {ignorePunctuation: true})); // ['Adieu', 'café', 'Cliché', 'communiqué', 'Premier', 'réservé']
 
@@ -49,6 +42,7 @@ class HogDisplay extends Component {
 
   getHogs = () => {
     let search = this.props.search;
+//    let sortedHogs =
     let filteredHogs = hogs.filter(hog => {
       return (hog.name.toLowerCase().includes(search) &&  this.matchesGreased(hog.greased));
     });
